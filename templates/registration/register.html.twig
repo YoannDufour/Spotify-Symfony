@@ -1,0 +1,21 @@
+{% extends 'unauth_base.html.twig' %}
+
+{% block importmap %}{{ importmap('app_register') }}{% endblock %}
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="logo"><img src=".{{ asset('/img/spotify-logo.png') }}" alt=""></div>
+        <h1>Sign up to <span>start listening</span></h1>
+        {{ form_errors(registrationForm) }}
+        {{ form_start(registrationForm) }}
+
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        <button type="submit" class="next">Register</button>
+        {{ form_end(registrationForm) }}
+
+    </div>
+{% endblock %}

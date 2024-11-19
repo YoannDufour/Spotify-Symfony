@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello trackController!{% endblock %}
+
+{% block body %}
+    <div class="artist is-verified">
+
+        <div class="artist__header" style="background-image:url({{ track.pictureLink }}" >
+
+            <div class="artist__info">
+
+                <div class="profile__img">
+
+                    <img src="{{ track.pictureLink }}" alt="G-Eazy"/>
+
+                </div>
+
+                <div class="artist__info__meta">
+
+                    <div class="artist__info__name">{{ track.name }}</div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="spotify-playlists">
+        <h2>Recommendations</h2>
+        {% include '/track/components/_listing.html.twig' with {tracks: recommendations} %}
+    </div>
+{% endblock %}

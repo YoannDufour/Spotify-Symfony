@@ -1,0 +1,4 @@
+<div class="play" hx-get="{{ path("app_track_like", {'id' : track.spotifyId}) }}" hx-target="this"
+     hx-swap="innerHTML">
+    {{ render(path('app_track_liked', {'id': track.spotifyId})) }}
+</div>

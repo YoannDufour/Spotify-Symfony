@@ -1,0 +1,34 @@
+<div class="content__left">
+
+    <section class="navigation">
+
+        <!-- Tracks -->
+        <div class="navigation__list">
+
+            <div class="navigation__list__header"
+                 role="button"
+                 data-toggle="collapse"
+                 href="#main"
+                 aria-expanded="true"
+                 aria-controls="main">
+                Tracks
+            </div>
+
+            <div class="collapse in" id="main">
+
+                <a href="{{ path('app_track_index') }}" class="navigation__list__item">
+                    <i class="ion-ios-browsers"></i>
+                    <span>Browse</span>
+                </a>
+
+                <a href="{{ path('app_track_favorite') }}" class="navigation__list__item">
+                    <i class="ion-person-stalker"></i>
+                    <span>Favorites</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+</div>

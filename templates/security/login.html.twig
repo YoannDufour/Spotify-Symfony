@@ -1,0 +1,31 @@
+{% extends 'unauth_base.html.twig' %}
+
+{% block importmap %}{{ importmap('app_login') }}{% endblock %}
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="logo"><img src=".{{ asset('/img/spotify-logo.png') }}" alt=""></div>
+
+        <h1>Log in to Spotify</h1>
+
+        <form method="post">
+
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+
+            <button class="next" type="submit">
+                Sign in
+            </button>
+            <div class="forget"><a href="">Forget your password?</a></div>
+
+            <div class="account">Don't have an account? &nbsp; <a href="{{ path('app_register') }}">Sign up for spotify</a></div>
+        </form>
+    </div>
+{% endblock %}

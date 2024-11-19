@@ -1,0 +1,14 @@
+<div class="list">
+    {% for track in tracks %}
+        <div class="item">
+            <img src="{{ track.pictureLink }}"/>
+            {% if app.user %}
+                {% include '/track/components/_like_container.html.twig' with {track: track} %}
+            {% endif %}
+            <a href="{{ path('app_track_show', {'id': track.spotifyId}) }}">
+                <h4>{{ track.name }}</h4>
+            </a>
+        </div>
+
+    {% endfor %}
+</div>

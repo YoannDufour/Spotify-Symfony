@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello trackController!{% endblock %}
+
+{% block body %}
+
+    <div class="spotify-playlists">
+        <h2>Favorite's</h2>
+
+        {% include '/track/components/_listing.html.twig' %}
+    </div>
+
+    <script
+            src="https://kit.fontawesome.com/23cecef777.js"
+            crossorigin="anonymous"
+    ></script>
+{% endblock %}

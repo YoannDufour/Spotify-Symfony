@@ -2,107 +2,196 @@
 
 namespace App\Entity;
 
+use App\Repository\TrackRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: TrackRepository::class)]
 class Track
 {
-    private int $discNumber;
-    private int $durationMs;
-    private bool $explicit;
-    private string $isrc;
-    private string $spotifyUrl;
-    private string $href;
-    private string $id;
-    private bool $isLocal;
-    private string $name;
-    private int $popularity;
-    private ?string $previewUrl;
-    private int $trackNumber;
-    private string $type;
-    private string $uri;
-    private ?string $pictureLink;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    public function __construct(
-        int $discNumber,
-        int $durationMs,
-        bool $explicit,
-        string $isrc,
-        string $spotifyUrl,
-        string $href,
-        string $id,
-        bool $isLocal,
-        string $name,
-        int $popularity,
-        ?string $previewUrl,
-        int $trackNumber,
-        string $type,
-        string $uri,
-        ?string $pictureLink
-    ) {
-        $this->discNumber = $discNumber;
-        $this->durationMs = $durationMs;
-        $this->explicit = $explicit;
-        $this->isrc = $isrc;
-        $this->spotifyUrl = $spotifyUrl;
-        $this->href = $href;
-        $this->id = $id;
-        $this->isLocal = $isLocal;
-        $this->name = $name;
-        $this->popularity = $popularity;
-        $this->previewUrl = $previewUrl;
-        $this->trackNumber = $trackNumber;
-        $this->type = $type;
-        $this->uri = $uri;
-        $this->pictureLink = $pictureLink;
-    }
+    #[ORM\Column(nullable: true)]
+    private ?int $discNumber = null;
 
-    // Getters for all properties
-    public function getDiscNumber(): int
+    #[ORM\Column(nullable: true)]
+    private ?int $durationMs = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $explicit = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $isrc = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $spotifyUrl = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $href = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $spotifyId = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isLocal = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $name = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $popularity = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $previewUrl = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $trackNumber = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $type = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $uri = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $pictureLink = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'tracks')]
+    private Collection $users;
+
+    public function __construct()
     {
-        return $this->discNumber;
+        $this->users = new ArrayCollection();
     }
 
-    public function getDurationMs(): int
-    {
-        return $this->durationMs;
-    }
-
-    public function isExplicit(): bool
-    {
-        return $this->explicit;
-    }
-
-    public function getIsrc(): string
-    {
-        return $this->isrc;
-    }
-
-    public function getSpotifyUrl(): string
-    {
-        return $this->spotifyUrl;
-    }
-
-    public function getHref(): string
-    {
-        return $this->href;
-    }
-
-    public function getId(): string
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function isLocal(): bool
+    public function getDiscNumber(): ?int
+    {
+        return $this->discNumber;
+    }
+
+    public function setDiscNumber(?int $discNumber): static
+    {
+        $this->discNumber = $discNumber;
+
+        return $this;
+    }
+
+    public function getDurationMs(): ?int
+    {
+        return $this->durationMs;
+    }
+
+    public function setDurationMs(?int $durationMs): static
+    {
+        $this->durationMs = $durationMs;
+
+        return $this;
+    }
+
+    public function isExplicit(): ?bool
+    {
+        return $this->explicit;
+    }
+
+    public function setExplicit(?bool $explicit): static
+    {
+        $this->explicit = $explicit;
+
+        return $this;
+    }
+
+    public function getIsrc(): ?string
+    {
+        return $this->isrc;
+    }
+
+    public function setIsrc(?string $isrc): static
+    {
+        $this->isrc = $isrc;
+
+        return $this;
+    }
+
+    public function getSpotifyUrl(): ?string
+    {
+        return $this->spotifyUrl;
+    }
+
+    public function setSpotifyUrl(string $spotifyUrl): static
+    {
+        $this->spotifyUrl = $spotifyUrl;
+
+        return $this;
+    }
+
+    public function getHref(): ?string
+    {
+        return $this->href;
+    }
+
+    public function setHref(?string $href): static
+    {
+        $this->href = $href;
+
+        return $this;
+    }
+
+    public function getSpotifyId(): ?string
+    {
+        return $this->spotifyId;
+    }
+
+    public function setSpotifyId(?string $spotifyId): static
+    {
+        $this->spotifyId = $spotifyId;
+
+        return $this;
+    }
+
+    public function isLocal(): ?bool
     {
         return $this->isLocal;
     }
 
-    public function getName(): string
+    public function setLocal(?bool $isLocal): static
+    {
+        $this->isLocal = $isLocal;
+
+        return $this;
+    }
+
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getPopularity(): int
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPopularity(): ?int
     {
         return $this->popularity;
+    }
+
+    public function setPopularity(?int $popularity): static
+    {
+        $this->popularity = $popularity;
+
+        return $this;
     }
 
     public function getPreviewUrl(): ?string
@@ -110,23 +199,79 @@ class Track
         return $this->previewUrl;
     }
 
-    public function getTrackNumber(): int
+    public function setPreviewUrl(?string $previewUrl): static
+    {
+        $this->previewUrl = $previewUrl;
+
+        return $this;
+    }
+
+    public function getTrackNumber(): ?int
     {
         return $this->trackNumber;
     }
 
-    public function getType(): string
+    public function setTrackNumber(?int $trackNumber): static
+    {
+        $this->trackNumber = $trackNumber;
+
+        return $this;
+    }
+
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    public function getUri(): string
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getUri(): ?string
     {
         return $this->uri;
     }
 
-    public function getPictureLink(): string
+    public function setUri(?string $uri): static
+    {
+        $this->uri = $uri;
+
+        return $this;
+    }
+
+    public function getPictureLink(): ?string
     {
         return $this->pictureLink;
+    }
+
+    public function setPictureLink(?string $pictureLink): static
+    {
+        $this->pictureLink = $pictureLink;
+
+        return $this;
+    }
+
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        $this->users->removeElement($user);
+
+        return $this;
     }
 }
